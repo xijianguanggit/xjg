@@ -1,0 +1,3 @@
+demoService = org.dubbo.consumer.DemoServiceImplspi
+demoService1 = org.dubbo.consumer.DemoServiceImpl
+
