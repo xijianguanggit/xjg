@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="componentListConfig.xsd">
+	<panels>
+		<panel name="Grid">
+			<children>
+				<item>ImageView</item>
+				<item>Button</item>
+				<item>Hidden</item>
+				<item>TextBox</item>
+				<item>DateBox</item>
+				<item>CheckBox</item>
+				<item>TimeBox</item>
+				<item>ComboBox</item>
+				<item>MultipleComboBox</item>
+				<item>PopupBox</item>
+				<item>DataLink</item>
+				<item>FileBox</item>
+				<item>Link</item>
+				<item>RadioButton</item>
+			</children>
+			<methods>
+				<item name="package" value="packageDatagrid" path="/view/common/js/datagrid.js" />
+				<item name="unpackage" value="unpackageDatagrid" path="/view/common/js/datagrid.js" />
+				<item name="loadData" value="loadDataGrid" path="/view/common/js/datagrid.js" />
+				<item name="loadTransform" value="loadTransformGrid" path="/view/common/js/datagrid.js" />				
+				<item name="getIds" value="getIdsGrid" path="/view/common/js/datagrid.js" />
+				<item name="setParam" value="setParamGrid" path="/view/common/js/datagrid.js" />
+				<item name="getOption" value="getOptionGrid" path="/view/common/js/datagrid.js" />
+				<item name="setOption" value="setOptionGrid" path="/view/common/js/datagrid.js" />
+				<item name="acceptChanges" value="acceptChangesGrid" path="/view/common/js/datagrid.js" />
+			</methods>
+			<events>
+			<event name=""></event>
+			</events>
+		</panel>
+		<panel name="HiddenTable">
+			<children>
+				<item>Button</item>
+				<item>Hidden</item>
+				<item>TextBox</item>
+				<item>DateBox</item>
+				<item>ComboBox</item>
+				<item>MultipleComboBox</item>
+				<item>PopupBox</item>
+				<item>DataLink</item>
+				<item>Link</item>
+<!--				<item>RadioButton</item>-->
+			</children>
+			<methods>
+				<item name="package" value="packageDatagrid" path="/view/common/js/datagrid.js" />
+				<item name="unpackage" value="unpackageDatagrid" path="/view/common/js/datagrid.js" />
+				<item name="loadData" value="loadDataGrid" path="/view/common/js/datagrid.js" />
+				<item name="loadTransform" value="loadTransformGrid" path="/view/common/js/datagrid.js" />				
+				<item name="getIds" value="getIdsGrid" path="/view/common/js/datagrid.js" />
+				<item name="setParam" value="setParamGrid" path="/view/common/js/datagrid.js" />
+				<item name="getOption" value="getOptionGrid" path="/view/common/js/datagrid.js" />
+				<item name="setOption" value="setOptionGrid" path="/view/common/js/datagrid.js" />
+				<item name="acceptChanges" value="acceptChangesGrid" path="/view/common/js/datagrid.js" />
+			</methods>
+			<events>
+			<event name=""></event>
+			</events>
+		</panel>
+		<panel name="Group">
+			<children>
+				<item>Button</item>
+				<item>CheckBox</item>
+				<item>Label</item>
+				<item>TextBox</item>
+				<item>DateBox</item>
+				<item>DateTimeBox</item>
+				<item>TimeBox</item>
+				<item>ComboBox</item>
+				<item>MultipleComboBox</item>
+				<item>PopupBox</item>
+				<item>PasswordBox</item>
+				<item>FileBox</item>
+				<item>CheckBox</item>
+				<item>Hidden</item>
+				<item>KindEditor</item>
+				<item>UEditor</item>
+				<item>RadioButton</item>
+			</children>
+			<methods>
+				<item name="package" value="packageGroup" path="/view/common/js/group.js"></item>
+				<item name="unpackage" value="unpackageGroup" path="/view/common/js/group.js"></item>
+				<item name="loadData" value="loadDataGroup" path="/view/common/js/group.js"></item>
+				<item name="loadTransform" value="loadTransformGroup" path="/view/common/js/group.js" />
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="Image">
+			<children>
+				<item>ImageView</item>
+			</children>
+			<methods>
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="Toolbar">
+			<children>
+				<item>Button</item>
+				<item>Hidden</item>
+			</children>
+			<methods><!-- 必须有 -->
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="Tree">
+			<children>
+				<item>DataLink</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="package" value="packageTree" path="/view/common/js/tree.js" />
+				<item name="unpackage" value="unpackageTree" path="/view/common/js/tree.js" />
+				<item name="loadData" value="loadDataTree" path="/view/common/js/tree.js" />
+				<item name="getIds" value="getIdsTree" path="/view/common/js/tree.js" />
+				<item name="getOption" value="getOptionTree" path="/view/common/js/tree.js" />
+				<item name="setOption" value="setOptionTree" path="/view/common/js/tree.js" />
+				<item name="loadTransform" value="loadTransformTree" path="/view/common/js/tree.js" />
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="Hidden">
+			<children>
+				<item>Label</item>
+				<item>TextBox</item>
+				<item>DateBox</item>
+				<item>ComboBox</item>
+				<item>MultipleComboBox</item>
+				<item>PopupBox</item>
+				<item>PasswordBox</item>
+				<item>FileBox</item>
+				<item>CheckBox</item>
+				<item>Hidden</item>
+				<item>RadioButton</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadDataHidden" path="/view/common/js/hidden.js" />
+				<item name="package" value="packageHidden" path="/view/common/js/hidden.js" />
+				<item name="unpackage" value="unpackageHidden" path="/view/common/js/hidden.js" />
+				<item name="loadTransform" value="loadTransformHidden" path="/view/common/js/hidden.js" />				
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="PieChart">
+			<children>
+				<item>TextBox</item>
+				<item>DataLink</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadChartData" path="/view/common/js/chart.js"/>
+				<item name="package" value="packageChartData" path="/view/common/js/chart.js"></item>
+				<item name="unpackage" value="unPackageChartData" path="/view/common/js/chart.js"></item>
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="LineChart">
+			<children>
+				<item>TextBox</item>
+				<item>DataLink</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadChartData" path="/view/common/js/chart.js"/>
+				<item name="package" value="packageChartData" path="/view/common/js/chart.js"></item>
+				<item name="unpackage" value="unPackageChartData" path="/view/common/js/chart.js"></item>
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="BarChart">
+			<children>
+				<item>TextBox</item>
+				<item>DataLink</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadChartData" path="/view/common/js/chart.js"/>
+				<item name="package" value="packageChartData" path="/view/common/js/chart.js"></item>
+				<item name="unpackage" value="unPackageChartData" path="/view/common/js/chart.js"></item>
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="ColumnChart">
+			<children>
+				<item>TextBox</item>
+				<item>DataLink</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadChartData" path="/view/common/js/chart.js"/>
+				<item name="package" value="packageChartData" path="/view/common/js/chart.js"></item>
+				<item name="unpackage" value="unPackageChartData" path="/view/common/js/chart.js"></item>
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="GanttChart">
+			<children>
+				<item>TextBox</item>
+				<item>DataLink</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadGanttChartData" path="/view/common/js/ganttchart.js"/>
+				<item name="package" value="packageChartData" path="/view/common/js/chart.js"></item>
+				<item name="unpackage" value="unPackageChartData" path="/view/common/js/chart.js"></item>
+			</methods>
+			<events>
+			</events>
+		</panel>
+		<panel name="WorkflowList">
+			<children>
+				<item>Link</item>
+				<item>TextBox</item>
+				<item>Hidden</item>
+			</children>
+			<methods>
+				<item name="loadData" value="loadWorkflowListData" path="/view/common/js/workflowList.js"/>
+				<item name="package" value="packageWorkflowData" path="/view/common/js/workflowList.js"></item>
+				<item name="unpackage" value="unPackageWorkflowData" path="/view/common/js/workflowList.js"></item>
+				<item name="loadTransform" value="loadTransformWorkflowList" path="/view/common/js/workflowList.js" />
+			</methods>
+			<events>
+			</events>
+		</panel>
+	</panels>
+	<controls>
+	</controls>
+</tsoftware>

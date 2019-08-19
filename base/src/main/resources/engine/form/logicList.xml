@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<logics>
+		<logic name="AddRow" multi="N" >
+			<params>
+				<param name="In" required="N" />
+				<param name="Out" required="Y" />
+			</params>
+		</logic>
+		<logic name="Back" multi="N" />
+		<logic name="Clear" multi="N" >
+			<params>
+				<param name="Out" required="Y" />
+			</params>
+		</logic>	
+		<logic name="ConfirmMsg" multi="Y" >
+			<params>
+				<param name="Title" required="N" />
+				<param name="Mode" required="N" />
+			</params>
+		</logic>			
+		<logic name="Query" multi="N" >
+			<params>
+				<param name="In" required="N" />
+				<param name="Out" required="Y" />
+			</params>
+		</logic>		
+	</logics>

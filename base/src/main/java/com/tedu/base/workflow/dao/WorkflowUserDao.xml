@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.base.workflow.dao.WorkflowUserDao">
+    <resultMap id="userResultMap" type="com.tedu.base.auth.login.model.UserModel">
+        <id column="ID" property="userId"/>
+        <result column="empName" property="empName"/>
+        <result column="EMP_ID" property="empId"/>
+        <result column="SALT" property="salt"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="AUTH_TYPE" property="authType"/>
+        <result column="WRONG_COUNT" property="wrongCount"/>
+        <result column="VALIDATE" property="validate"/>
+        <result column="ROLE_ID" property="roleId"/>
+        <result column="email" property="email"/>
+    </resultMap>
+    <!--人员查询-->
+    <select id="getEmpNameByUserId" resultMap="userResultMap" parameterType="java.lang.String">
+       select u.id,e.email from t_user u INNER join t_employee  e on u.emp_id=e.id  where u.id=#{userId}
+	</select>
+    <select id="getEmpNameByRoleId" resultMap="userResultMap" parameterType="java.lang.String">
+select u.id as userId,e.email from (select id  from t_role where id=#{roleId} ) r
+inner join t_user_role ur on r.id =ur.role_id
+inner join t_user u on u.id=ur.user_id
+INNER join t_employee  e on u.emp_id=e.id
+	</select>
+    <select id="getEmpNameByPositionId" resultMap="userResultMap" parameterType="java.lang.String">
+select u.id as userId,e.email from ( select id from t_position where id =#{postId}) p
+INNER join t_employee  e on e.postion_id = p.id
+inner join  t_user u on u.emp_id=e.id
+	</select>
+
+    <select id="getPmNameByProjId" resultMap="userResultMap" parameterType="java.lang.String">
+        select u.id as userId,e.email  from t_project p
+        inner join t_employee e on p.project_manager = e.id
+        inner join t_user u on u.emp_id=e.id
+        where p.id = #{projId}
+    </select>
+    <select id="getTestManagerByProjId" resultMap="userResultMap" parameterType="java.lang.String">
+        select u.id as userId,e.email  from t_project p
+        inner join t_employee e on p.test_manager = e.id
+        inner join t_user u on u.emp_id=e.id
+        where p.id = #{projId}
+    </select>
+    <select id="getProductManagerByProjId" resultMap="userResultMap" parameterType="java.lang.String">
+        select u.id as userId,e.email  from t_project p
+        inner join t_employee e on p.product_manager = e.id
+        inner join t_user u on u.emp_id=e.id
+        where p.id = #{projId}
+    </select>
+    <select id="getManagerNameByOrgId" resultMap="userResultMap" parameterType="java.lang.String">
+select u.id  as userId,e.email
+from (select manager_id from t_org where id=#{orgId}) o
+INNER join t_employee  e on o.manager_id = e.id
+INNER join t_user u on u.emp_id =e.id
+	</select>
+    <select id="getManagerNameByEmpId" resultMap="userResultMap" parameterType="java.lang.String">
+        	select  u.id  as userId,e.email from (
+				select eo.*,t.manager_id from  (
+				select org_id from t_employee
+				where id = #{empId} ) eo
+				inner join t_org t on  eo.org_id =t.id) o
+				left join t_employee  e on o.manager_id = e.id
+            left join t_user u on u.emp_id =e.id
+    </select>
+    <select id="geNameByIds" resultMap="userResultMap" >
+select u1.id as userId,e.name as empName from  (select u.id,u.emp_Id from t_user u where u.id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+      </foreach>   ) u1
+left join  t_employee  e on u1.emp_Id = e.id
+    </select>
+</mapper>
