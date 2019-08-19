@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.base.auth.login.dao.LoginMysqlDao">
+<resultMap id="userResultMap" type="com.tedu.base.auth.login.model.UserModel">
+	<id column="ID" property="userId" />
+	<result column="NAME" property="userName" />
+	<result column="customName" property="name" />
+	<result column="mobile" property="mobile" />
+	<result column="nickName" property="nickName" />
+	<result column="EMP_ID" property="empId" />
+	<result column="SALT" property="salt" />
+	<result column="PASSWORD" property="password" />
+	<result column="AUTH_TYPE" property="authType" />
+	<result column="WRONG_COUNT" property="wrongCount" />
+	<result column="VALIDATE" property="validate" />
+	<result column="ROLE_ID" property="roleId" />
+</resultMap>
+<select id="getUserInfoByName" resultMap="userResultMap" parameterType="java.lang.String">
+SELECT
+	u.id as userId,
+	u.name as userName,
+	emp_id as empId,
+	right(password,32) as salt,
+    password,
+	auth_type ,
+	wrong_count ,
+	validate,
+    u.status,e.org_id as orgId,org.name as orgName,
+	e.name as empName,group_concat(r.name order by r.name  separator ",") as roleName,r.id as roleId,r.name as roleName   
+FROM
+	t_user u 
+    left join t_employee e on u.emp_id= e.id 
+	left join t_user_role ur on u.id=ur.user_id 
+	left join t_role r on ur.role_id=r.id 
+	left join t_org org on e.org_id = org.id
+WHERE
+	2 = 2
+AND u.name = #{userName}
+group by u.id 
+</select>
+<!-- 客户登录方法 后加 -->
+<select id="getCustomUserInfoByName" resultMap="userResultMap" parameterType="java.lang.String">
+SELECT
+	u.id AS userId,
+	'student' AS userName,
+	u.mobile,
+	u. NAME AS customName,
+	u.nick_name AS nickName,
+	'630' AS empId,
+	RIGHT (PASSWORD, 32) AS salt,
+	PASSWORD,
+	auth_type,
+	u. STATUS,
+	'student' AS roleName,
+	gender as gender,
+	birth_date AS birthDate,
+	grade as grade 
+FROM
+	t_student u
+WHERE
+	2 = 2
+AND u.mobile = #{userName}
+GROUP BY
+	u.id
+LIMIT 1
+</select>
+<select id="getCustomUserInfoByOpenId" resultMap="userResultMap" parameterType="java.lang.String">
+SELECT
+	u.id as userId,
+	'student' as userName,
+	u.mobile,
+	u.name as customName,
+	u.nick_name as nickName,
+	'630' as empId,
+	right(password,32) as salt,
+    password,
+	auth_type ,
+    u.status,
+    'student' as roleName
+FROM
+	t_student u 
+WHERE
+	2 = 2
+AND u.open_id = #{openId}
+group by u.id 
+LIMIT 1
+</select>
+
+
+<!-- 中曌会员登录 -->
+<select id="getAssociatorInfoByName" resultMap="userResultMap" parameterType="java.lang.String">
+select c.id as userId,
+	'customer' as userName,
+	c.mob as mobile,
+	c.cname as custoName,
+	'683' as empId,
+	right(password,32) as salt,
+	c.`password`,
+	auth_type,
+	c.`status`,
+	'customer' as roleName
+	from t_customer_info c
+where 2=2 
+and c.mob = #{userName}
+group by c.id 
+limit 1 
+</select>
+
+
+<select id="getAuthorization" resultType="java.util.Map" parameterType="java.lang.String">
+	<![CDATA[ select * from (SELECT
+	chm.*,
+	t.name as parentName,
+	t.seq  as parentSeq
+	FROM
+	(
+	SELECT
+	*
+	FROM
+	(
+	SELECT DISTINCT
+	( m.code ),
+	m.type,
+	cast(m.seq as char) as seq, 
+	cast(m.parent as char) as parent,
+	m.name,
+	m.target,
+	r.url,
+	r.resName
+	FROM
+	(
+	select DISTINCT id,url ,resName from (select
+	res.url AS url,
+	res.name AS resName,
+	res.id
+	FROM
+	t_resource res
+	LEFT JOIN t_res_func resf ON res.id = resf.res_id
+	LEFT JOIN t_function f ON f.id = resf.func_id
+	LEFT JOIN t_role_func rf ON rf.func_id = f.id
+	LEFT JOIN t_user_role ur ON rf.role_id = ur.role_id
+	LEFT JOIN t_user u ON ur.user_id = u.id
+	WHERE
+	u.name = #{userName}
+	union all
+	select
+	res1.url AS url,
+	res1.name AS resName,
+	res1.id
+	FROM
+	t_resource res1 where res1.Is_auth = 0
+	) resource
+	) r
+	INNER JOIN ( SELECT type, seq, parent, code, name, target, res_id FROM t_menu WHERE res_id IS NOT NULL ) m ON r.id = m.res_id
+	) a ORDER BY a.seq
+	) chm
+	INNER JOIN t_menu t ON chm.parent = t.CODE
+	ORDER BY
+	t.seq,
+	t.name
+	) r ORDER BY r.parentSeq,0+r.seq,r.name
+	]]>
+</select>
+
+<select id="getAllAuthorization" resultType="java.util.Map" parameterType="java.lang.String">
+ select chm.*,
+  t.name as parentName,
+	t.seq  as parentSeq from (Select DISTINCT
+	( m.code ),
+	m.type,
+	cast(m.seq as char) as seq,
+	cast(m.parent as char) as parent,
+	m.name,
+	m.target,
+	r.url,
+	r.name as resName
+	from t_menu m inner join t_resource r
+	on m.res_id = r.id )
+	chm
+INNER JOIN t_menu t ON chm.parent = t.CODE
+   ORDER BY t.seq,0+chm.seq,chm.name
+</select>
+
+
+<select id="getResList" resultType="java.util.Map" parameterType="java.lang.String">
+SELECT res.url as url, res.name as resName FROM t_resource res
+LEFT  JOIN t_res_func resf on res.id=resf.RES_ID 
+LEFT JOIN t_function f ON f.id=resf.FUNC_ID
+LEFT JOIN  t_role_func rf on rf.func_id=f.id 
+LEFT  JOIN t_user_role ur on rf.role_id=ur.ROLE_ID
+LEFT  JOIN t_user u on ur.user_id = u.id
+where 1=1 
+<if test="userName!=null and userName!=''">
+	and u.name = #{userName}
+</if>
+</select>
+<update id="updateWrongCount" >
+    UPDATE t_user set update_count=#{wrongCount},update_by=#{updateBy}
+    <if test="updateTime!=null">
+    ,`UPDATE_TIME`=#{updateTime}
+    </if>
+    <if test="validate==1">
+	, validate = '1'
+	</if>
+    <if test="wrongCount==0">
+	, validate = '0'
+	</if>
+    where name=#{userName}
+</update>
+
+<update id="updatePwd" useGeneratedKeys="true" >
+	update t_user set
+	password=#{password}
+	where id = #{userId}
+</update>
+	
+<select id="query" resultType="java.util.Map" >
+	${queryParam}
+</select>	        
+</mapper>

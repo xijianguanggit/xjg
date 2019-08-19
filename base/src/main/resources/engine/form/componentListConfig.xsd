@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:element name="tsoftware" type="tsoftwareType" />
+
+
+	<xs:complexType name="childrenType">
+		<xs:sequence>
+			<xs:element name="item" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="methodsType">
+		<xs:sequence>
+			<xs:element name="item" maxOccurs="unbounded" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="name" type="xs:string" />
+					<xs:attribute name="value" type="xs:string" />
+					<xs:attribute name="path" type="xs:string" />
+					<xs:attribute name="param" type="xs:string" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="eventsType">
+		<xs:sequence>
+			<xs:element name="event" maxOccurs="unbounded" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="name" type="xs:string" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="panelType">
+		<xs:sequence>
+			<xs:element type="childrenType" name="children" />
+			<xs:element type="methodsType" name="methods" />
+			<xs:element type="eventsType" name="events" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string">
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="panelsType">
+		<xs:sequence>
+			<xs:element type="panelType" name="panel" maxOccurs="unbounded"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="controlsType">
+		<xs:sequence>
+			<xs:element name="control" maxOccurs="unbounded"
+				minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="name" type="xs:string" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tsoftwareType">
+		<xs:sequence>
+			<xs:element type="panelsType" name="panels" />
+			<xs:element type="controlsType" name="controls">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
