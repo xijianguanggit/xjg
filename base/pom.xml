@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<activiti.version>6.0.0</activiti.version>
 		<spring.version>4.2.5.RELEASE</spring.version>
-		<mybatis.version>3.4.2</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 	</properties>
 
 	<dependencies>
